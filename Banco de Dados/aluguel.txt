@@ -1,0 +1,24 @@
+
+DB: aluguel
+
+CREATE DATABASE `aluguel` /*!40100 DEFAULT CHARACTER SET latin1 */
+
+Administrador
+
+CREATE TABLE `administrador` (\n  `idAdministrador` int(11) NOT NULL AUTO_INCREMENT,\n  `usuario` varchar(45) NOT NULL,\n  `senha` varchar(32) NOT NULL,\n  PRIMARY KEY (`idAdministrador`)\n) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1
+
+Cliente
+
+CREATE TABLE `cliente` (\n  `idCliente` int(11) NOT NULL AUTO_INCREMENT,\n  `nome` varchar(45) NOT NULL,\n  `sobrenome` varchar(45) NOT NULL,\n  `cpf` varchar(11) NOT NULL,\n  `telefone` varchar(11) NOT NULL,\n  `sexo` varchar(9) NOT NULL,\n  PRIMARY KEY (`idCliente`)\n) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=latin1
+
+Quarto
+
+CREATE TABLE `quarto` (\n  `idQuarto` int(11) NOT NULL AUTO_INCREMENT,\n  `numeroQuarto` varchar(5) NOT NULL,\n  `tipo` varchar(7) NOT NULL,\n  `quantBanheiros` int(11) NOT NULL,\n  `quantSalas` int(11) NOT NULL,\n  `quantCozinhas` int(11) NOT NULL,\n  `precoMensalidade` float NOT NULL,\n  `andar` varchar(1) NOT NULL,\n  PRIMARY KEY (`idQuarto`)\n) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1
+
+Aluguel
+
+CREATE TABLE `aluguel` (\n  `idClienteQuarto` int(11) NOT NULL AUTO_INCREMENT,\n  `idClienteFK` int(11) NOT NULL,\n  `idQuartoFK` int(11) NOT NULL,\n  `dataPagamento` varchar(2) NOT NULL,\n  PRIMARY KEY (`idClienteQuarto`),\n  KEY `fkcliente` (`idClienteFK`),\n  KEY `fkquarto` (`idQuartoFK`),\n  CONSTRAINT `fkcliente` FOREIGN KEY (`idClienteFK`) REFERENCES `cliente` (`idCliente`) ON DELETE NO ACTION ON UPDATE NO ACTION,\n  CONSTRAINT `fkquarto` FOREIGN KEY (`idQuartoFK`) REFERENCES `quarto` (`idQuarto`) ON DELETE NO ACTION ON UPDATE NO ACTION\n) ENGINE=InnoDB DEFAULT CHARSET=latin1
+
+Logs
+
+CREATE TABLE `logs` (\n  `idlogs` int(11) NOT NULL AUTO_INCREMENT,\n  `log_data` varchar(45) NOT NULL,\n  `log_hora` varchar(45) NOT NULL,\n  `user` varchar(45) NOT NULL,\n  PRIMARY KEY (`idlogs`)\n) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=latin1
